@@ -21,11 +21,12 @@ public class UserService{
     private static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public void saveEntry(User user) {
-        user.setRoles(Arrays.asList("USER"));
+
         userRepository.save(user);
     }
     public void saveNewEntry(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRoles(Arrays.asList("USER"));
         userRepository.save(user);
     }
     public List<User> getAll() {
@@ -50,7 +51,7 @@ public class UserService{
         return user;
     }
 
-
     public void deleteByUserName(String userName) {
+        userRepository.deleteByUserName(userName);
     }
 }

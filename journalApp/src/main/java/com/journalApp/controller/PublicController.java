@@ -3,11 +3,12 @@ package com.journalApp.controller;
 import com.journalApp.entity.User;
 import com.journalApp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/public")
-public class HealthController {
+public class PublicController {
     @Autowired
     private UserService userService;
 
@@ -17,8 +18,9 @@ public class HealthController {
         return "Ok";
     }
     @PostMapping("create-user")
-    public void createUser(@RequestBody User user){
-        userService.saveEntry(user);
+    public ResponseEntity<String> createUser(@RequestBody User user){
+        userService.saveNewEntry(user);
+        return ResponseEntity.ok("User created");
     }
 }
 

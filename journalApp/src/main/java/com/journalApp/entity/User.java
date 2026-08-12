@@ -1,5 +1,7 @@
 package com.journalApp.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NonNull;
 import org.bson.types.ObjectId;
@@ -20,11 +22,11 @@ public class User {
     private ObjectId id;
     @Indexed(unique = true)
     @Field("userName")
-    @NonNull
     private String userName;
-    @NonNull
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
     @DBRef
+    @JsonIgnore
     private List<JournalEntry> journalEntries = new ArrayList<>();
     private List<String> roles;
 }
