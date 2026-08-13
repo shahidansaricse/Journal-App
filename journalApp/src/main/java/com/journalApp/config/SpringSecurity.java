@@ -32,6 +32,7 @@ public class SpringSecurity extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/user/all").permitAll() // Allow registration
                 .antMatchers("/user/**").authenticated()           // Protect other user APIs
                 .antMatchers("/journal/**").authenticated()
+                .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().permitAll()
                 .and()
                 .httpBasic();

@@ -2,6 +2,7 @@ package com.journalApp.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import org.bson.types.ObjectId;
@@ -16,6 +17,7 @@ import java.util.List;
 
 @Document(collection = "users")
 @Data
+@Builder
 public class User {
 
     @Id

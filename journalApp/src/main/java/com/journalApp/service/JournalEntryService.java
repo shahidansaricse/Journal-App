@@ -107,9 +107,7 @@ public class JournalEntryService {
         Optional<JournalEntry> optionalEntry =
                 journalEntryRepository.findById(id);
 
-        if (optionalEntry.isEmpty()) {
-            return false;
-        }
+        if (optionalEntry.isPresent()) return false;
 
         JournalEntry existingEntry = optionalEntry.get();
 
