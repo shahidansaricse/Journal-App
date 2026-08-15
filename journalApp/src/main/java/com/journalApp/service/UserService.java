@@ -2,6 +2,7 @@ package com.journalApp.service;
 
 import com.journalApp.entity.User;
 import com.journalApp.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,6 +15,7 @@ import java.util.Optional;
 
 
 @Component
+@Slf4j
 public class UserService{
     @Autowired
     private UserRepository userRepository;
@@ -31,6 +33,7 @@ public class UserService{
             userRepository.save(user);
             return true;
         } catch (Exception e) {
+            log.error("Error occured while saving entry:",user.getUserName(),e);
             return false;
         }
     }
