@@ -22,8 +22,8 @@
 	<properties>
 		<java.version>21</java.version>
 
-		<sonar.projectKey>shahid-ansari_journalApp</sonar.projectKey>
-		<sonar.organization>shahid-ansari</sonar.organization>
+		<sonar.projectKey>shahidansaricse_Journal-App</sonar.projectKey>
+		<sonar.organization>shahidansaricse</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	</properties>
 

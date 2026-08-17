@@ -1,7 +1,9 @@
 package com.journalApp.controller;
 
+import com.journalApp.api.response.WeatherResponse;
 import com.journalApp.entity.User;
 import com.journalApp.service.UserService;
+import com.journalApp.service.WeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +24,9 @@ public class UserController {
         return userService.getAll();
     }
 
+    @Autowired
+    private WeatherService weatherService;
+
     @PostMapping
     public void createUser(@RequestBody User user) {
         userService.saveNewEntry(user);
@@ -40,6 +45,7 @@ public class UserController {
         }
         return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
     }
+
     @DeleteMapping
     public ResponseEntity<?> deleteUser() {
 
@@ -51,5 +57,28 @@ public class UserController {
         userService.deleteByUserName(userName);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping
+    public ResponseEntity<String> greeting() {
+
+        Authentication authentication =
+                SecurityContextHolder.getContext().getAuthentication();
+
+        String userName = authentication.getName();
+
+        WeatherResponse weatherResponse =
+                weatherService.getWeather("Buxar");
+
+        String greeting = "";
+
+        if (weatherResponse != null &&
+                weatherResponse.getCurrent() != null) {
+
+            greeting = ", Weather feels like "
+                    + weatherResponse.getCurrent().getFeelslike();
+        }
+
+        return ResponseEntity.ok("Hi " + userName + greeting);
     }
 }
