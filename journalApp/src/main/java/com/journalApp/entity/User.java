@@ -2,8 +2,10 @@ package com.journalApp.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -17,6 +19,8 @@ import java.util.List;
 @Document(collection = "users")
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
     @Id
@@ -24,6 +28,8 @@ public class User {
     @Indexed(unique = true)
     @Field("userName")
     private String userName;
+    private String email;
+    private String sentimentAnalysis;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
     @DBRef
